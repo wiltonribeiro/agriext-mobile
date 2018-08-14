@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#92d7e7"
+    tools:context=".Boundary.Activites.CultureChoiceActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:text="TIPO DE PLANTAÇÃO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnSpeakerCultureLayout"
+                android:layout_gravity="center"
+                android:background="@drawable/speaker"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:id="@+id/listCulture"
+            android:layout_height="match_parent">
+        </ListView>
+
+    </LinearLayout>
+
+    <include
+        android:visibility="gone"
+        layout="@layout/loading"/>
+
+</RelativeLayout>
