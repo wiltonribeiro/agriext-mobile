@@ -97,10 +97,11 @@ public class AdapterCulture extends BaseAdapter {
                 new Handler().postDelayed(runnable,500);
 
                 controlLoading.initLoading();
-                ControlResult controlResult = new ControlResult();
+
+                ControlResult controlResult = new ControlResult(context);
                 controlResult.calculate(currentListData, new CallBack() {
                     @Override
-                    public void methodToCallBack() {
+                    public void callBack() {
                         controlLoading.finishLoading();
                         activity.startActivity(new Intent(activity, ResultActivity.class));
                     }
