@@ -60,9 +60,10 @@ public class ControlResult implements CallBack {
         Classifier m5pModel;
         try {
             String filename = "m5p_new.model";
-            ObjectInputStream objectStream = new ObjectInputStream(context.getAssets().open(filename));
-            Object obj = objectStream.readObject();
-            m5pModel = (Classifier) obj;
+//            ObjectInputStream objectStream = new ObjectInputStream(context.getAssets().open(filename));
+//            Object obj = objectStream.readObject();
+//            m5pModel = (Classifier) obj;
+            m5pModel = (Classifier) weka.core.SerializationHelper.read(context.getAssets().open(filename));
         } catch (FileNotFoundException e) {
             return e.getMessage();
         } catch (IOException e) {
@@ -90,7 +91,7 @@ public class ControlResult implements CallBack {
         //dados_ufcup.csv não convertido
         //mediafortal.csv não convertido
 
-        Instances test = convertCSVToARFF(context.getAssets().open("upquixe.csv")).getInstances();
+        Instances test = convertCSVToARFF(context.getAssets().open("2016total-semoutlier2.csv")).getInstances();
 
 
 
