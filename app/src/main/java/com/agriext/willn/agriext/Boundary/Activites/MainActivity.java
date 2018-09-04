@@ -1,6 +1,7 @@
 package com.agriext.willn.agriext.Boundary.Activites;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,15 +35,15 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    String x = controlResult.quixadaHC(5);
-                    Log.i("willneto",x);
-                } catch (Exception e) {
-                    Log.e("willneto",e.getMessage());
-                    e.printStackTrace();
-                }
-//                startActivity(new Intent(MainActivity.this, CultureChoiceActivity.class));
-//                controlSpeaker.speak("Iniciando");
+//                try {
+//                    String x = controlResult.quixadaHC(5);
+//                    Log.i("willneto",x);
+//                } catch (Exception e) {
+//                    Log.e("willneto",e.getMessage());
+//                    e.printStackTrace();
+//                }
+                startActivity(new Intent(MainActivity.this, CultureChoiceActivity.class));
+                controlSpeaker.speak("Iniciando");
             }
         });
 
@@ -52,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
                 controlSpeaker.speak("Iniciar");
             }
         });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                controlSpeaker.speak("Para iniciar pressione o botão em movimento na tela.");
+            }
+        }, 500);
 
     }
 }

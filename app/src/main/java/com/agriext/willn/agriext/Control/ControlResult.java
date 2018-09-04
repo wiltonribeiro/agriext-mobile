@@ -1,8 +1,6 @@
 package com.agriext.willn.agriext.Control;
 import android.content.Context;
 import android.os.Handler;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.agriext.willn.agriext.Entity.Culture;
 import com.agriext.willn.agriext.Entity.Result;
@@ -13,15 +11,9 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 
 import weka.classifiers.Classifier;
-import weka.classifiers.meta.FilteredClassifier;
-import weka.classifiers.trees.J48;
-import weka.classifiers.trees.M5P;
-import weka.core.Capabilities;
 import weka.core.Instances;
-import weka.core.converters.ArffLoader;
 import weka.core.converters.ArffSaver;
 import weka.core.converters.CSVLoader;
-import weka.filters.unsupervised.attribute.StringToWordVector;
 
 
 public class ControlResult implements CallBack {
@@ -81,7 +73,27 @@ public class ControlResult implements CallBack {
             return e.getMessage();
         }
 
-        Instances test = convertCSVToARFF(context.getAssets().open("quixada-fevereiro-mes-et0.csv")).getInstances();
+        //ERROR lenght=15; index=15;
+        //2016-total.csv
+        //2016total-semoutlier2.csv
+        //cr200series_table1_agosto.csv
+        //fevereiro-quixada-sem-et0.csv
+        //fortaleza-fevereiro.csv
+        //quixada-fevereiro-mes-et0.csv
+        //dados_quixe.csv
+        //dadosfortal.csv
+        //up.csv
+        //updado.csv
+        //upquixe.csv
+
+        //Outros erros
+        //dados_ufcup.csv não convertido
+        //mediafortal.csv não convertido
+
+        Instances test = convertCSVToARFF(context.getAssets().open("upquixe.csv")).getInstances();
+
+
+
 //        ArffLoader arffLoader = new ArffLoader();
 //        arffLoader.setSource(context.getAssets().open("limpos.arff"));
 //        Instances test = arffLoader.getDataSet();
@@ -96,8 +108,8 @@ public class ControlResult implements CallBack {
         double evapo = 0.0;
         double value, kcValue;
 
-        Log.e("willneto",m5pModel.toString());
-        Log.e("willneto",test.toString());
+//        Log.e("willneto",m5pModel.toString());
+//        Log.e("willneto",test.toString());
 
         for (int i = 0;i<test.numInstances();i++){
             //ArrayIndexOutOfBoundsException está acontecendo aqui
