@@ -18,7 +18,6 @@ public class ControlCulture {
     }
 
     public void listCultures(ListView listView){
-
         listView.setAdapter(null);
         listView.requestLayout();
         listView.setAdapter(new AdapterCulture(context,fillCultureData(), new ControlSpeaker(context)));
