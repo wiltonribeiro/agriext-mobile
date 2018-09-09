@@ -25,13 +25,13 @@ public class ControlResult implements CallBack {
     }
 
     public void calculate(final Culture culture, final CallBack callBack){
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                result = new Result(culture, 50);callBack.callBack();
-            }
-        }, 5000);
+        try {
+            double water = quixadaHC(culture.getKc());
+            result = new Result(culture, water);
+            callBack.callBack();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void callBack() { }
@@ -55,75 +55,41 @@ public class ControlResult implements CallBack {
         return saver;
     }
 
-    public String quixadaHC(double kc) throws Exception {
+    private double quixadaHC(double kc) throws Exception {
 
-        Classifier m5pModel;
+        Classifier m5pModel = null;
         try {
-            String filename = "m5p_new.model";
-//            ObjectInputStream objectStream = new ObjectInputStream(context.getAssets().open(filename));
-//            Object obj = objectStream.readObject();
-//            m5pModel = (Classifier) obj;
+            String filename = "model_test.model";
             m5pModel = (Classifier) weka.core.SerializationHelper.read(context.getAssets().open(filename));
         } catch (FileNotFoundException e) {
-            return e.getMessage();
+            e.printStackTrace();
+            return 0;
         } catch (IOException e) {
-            return e.getMessage();
+            e.printStackTrace();
+            return 0;
         } catch (ClassNotFoundException e) {
-            return e.getMessage();
+            e.printStackTrace();
+            return 0;
         } catch (Exception e) {
-            return e.getMessage();
+            e.printStackTrace();
+            return 0;
         }
 
-        //ERROR lenght=15; index=15;
-        //2016-total.csv
-        //2016total-semoutlier2.csv
-        //cr200series_table1_agosto.csv
-        //fevereiro-quixada-sem-et0.csv
-        //fortaleza-fevereiro.csv
-        //quixada-fevereiro-mes-et0.csv
-        //dados_quixe.csv
-        //dadosfortal.csv
-        //up.csv
-        //updado.csv
-        //upquixe.csv
-
-        //Outros erros
-        //dados_ufcup.csv não convertido
-        //mediafortal.csv não convertido
-
         Instances test = convertCSVToARFF(context.getAssets().open("2016total-semoutlier2.csv")).getInstances();
-
-
-
-//        ArffLoader arffLoader = new ArffLoader();
-//        arffLoader.setSource(context.getAssets().open("limpos.arff"));
-//        Instances test = arffLoader.getDataSet();
-//        CSVLoader csvLoader = new CSVLoader();
-//        csvLoader.setSource(context.getAssets().open("limpos.csv"));
-//        Instances test = csvLoader.getDataSet();
         int index = test.numAttributes() - 1;
         if (test.classIndex() == -1)
             test.setClassIndex(index);
 
-        String resultado = "";
         double evapo = 0.0;
-        double value, kcValue;
-
-//        Log.e("willneto",m5pModel.toString());
-//        Log.e("willneto",test.toString());
+        double value;
 
         for (int i = 0;i<test.numInstances();i++){
-            //ArrayIndexOutOfBoundsException está acontecendo aqui
             double label = m5pModel.classifyInstance(test.get(i));
             test.instance(i).setClassValue(label);
             value = test.instance(i).value(index);
-            kcValue = value * kc;
-            resultado = resultado + value + ", " + kcValue + "\n";
             evapo = evapo + value;
         }
 
-        double irriga = evapo * kc;
-        resultado = resultado + evapo +", " + irriga;
-        return resultado;
+        return evapo * kc;
     }
 }
