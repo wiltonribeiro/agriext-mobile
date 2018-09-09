@@ -35,13 +35,6 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                try {
-//                    String x = controlResult.quixadaHC(5);
-//                    Log.i("willneto",x);
-//                } catch (Exception e) {
-//                    Log.e("willneto",e.getMessage());
-//                    e.printStackTrace();
-//                }
                 startActivity(new Intent(MainActivity.this, CultureChoiceActivity.class));
                 controlSpeaker.speak("Iniciando");
             }
