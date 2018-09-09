@@ -13,6 +13,8 @@ import com.agriext.willn.agriext.Control.ControlSpeaker;
 import com.agriext.willn.agriext.Entity.Result;
 import com.agriext.willn.agriext.R;
 
+import java.text.DecimalFormat;
+
 public class ResultActivity extends AppCompatActivity {
     ControlSpeaker controlSpeaker;
     TextView textQuantityWater;
@@ -26,9 +28,12 @@ public class ResultActivity extends AppCompatActivity {
         controlSpeaker = new ControlSpeaker(this);
         textQuantityWater = findViewById(R.id.textQuantityWater);
         btnSpeakResult = findViewById(R.id.btnSpeakResult);
+        int waterResult = (int) result.getQuantityWater();
 
-        final String textSpeakResult = "Calculamos que para hoje, seja ideal que você faça a irrigação com "+result.getQuantityWater()+" litros de água por hectare na sua" +
+
+        final String textSpeakResult = "Calculamos que para hoje, seja ideal que você faça a irrigação com "+waterResult+" litros de água por hectare na sua" +
                 "plantação de "+result.getCulture().getName();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -43,7 +48,7 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
 
-        textQuantityWater.setText((""+result.getQuantityWater()));
+        textQuantityWater.setText((Integer.toString(waterResult)));
 
     }
 }
