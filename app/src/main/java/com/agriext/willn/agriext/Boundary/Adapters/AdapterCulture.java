@@ -85,27 +85,32 @@ public class AdapterCulture extends BaseAdapter {
                 final Activity activity = (Activity)context;
                 final ControlSpeaker controlSpeaker = new ControlSpeaker(context);
                 final ControlLoading controlLoading = new ControlLoading(activity, controlSpeaker);
+                final ControlResult controlResult = new ControlResult(context);
 
 
+                controlLoading.initLoading();
                 Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        controlResult.calculate(currentListData, new CallBack() {
+                            @Override
+                            public void callBack() {
+                                controlLoading.finishLoading();
+                                activity.startActivity(new Intent(activity, ResultActivity.class));
+                            }
+                        });
+                    }
+                };
+
+                Runnable speaker = new Runnable() {
                     @Override
                     public void run() {
                         controlSpeaker.speak("AGUARDE UM POUCO, ESTAMOS CARREGANDO");
                     }
                 };
 
-                new Handler().postDelayed(runnable,500);
-
-                controlLoading.initLoading();
-
-                ControlResult controlResult = new ControlResult(context);
-                controlResult.calculate(currentListData, new CallBack() {
-                    @Override
-                    public void callBack() {
-                        controlLoading.finishLoading();
-                        activity.startActivity(new Intent(activity, ResultActivity.class));
-                    }
-                });
+                new Handler().postDelayed(speaker,100);
+                new Handler().postDelayed(runnable,2000);
             }
         });
 
