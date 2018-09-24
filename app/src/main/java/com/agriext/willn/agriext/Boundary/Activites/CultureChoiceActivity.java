@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import com.agriext.willn.agriext.Control.ControlCulture;
@@ -13,7 +14,7 @@ import com.agriext.willn.agriext.R;
 
 public class CultureChoiceActivity extends AppCompatActivity {
 
-    ListView listCulture;
+    GridView listCulture;
     ControlCulture controlCulture;
     ControlSpeaker controlSpeaker;
     Button btnSpeakerCultureLayout;
@@ -39,8 +40,14 @@ public class CultureChoiceActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                controlSpeaker.speak("Selecione o tipo de plantação que deseja irrigar agora");
+                controlSpeaker.speak("Selecione o tipo de plantação que você possui");
             }
         }, 1000);
+    }
+
+    @Override
+    public void onBackPressed() {
+        ControlCulture.saveSelectedCultures();
+        super.onBackPressed();
     }
 }
