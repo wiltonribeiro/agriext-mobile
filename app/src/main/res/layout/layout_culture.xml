@@ -23,8 +23,17 @@
             <ImageView
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="match_parent"
                 android:id="@+id/imgCulture" />
+
+            <ImageView
+                android:id="@+id/imgChecked"
+                android:visibility="gone"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/checked"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
 
             <RelativeLayout
                 android:background="@drawable/black_opacity"

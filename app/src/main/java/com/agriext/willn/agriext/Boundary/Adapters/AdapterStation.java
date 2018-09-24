@@ -1,29 +1,18 @@
 package com.agriext.willn.agriext.Boundary.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.agriext.willn.agriext.Boundary.Activites.ResultActivity;
-import com.agriext.willn.agriext.Control.CallBack;
-import com.agriext.willn.agriext.Control.ControlLoading;
-import com.agriext.willn.agriext.Control.ControlResult;
 import com.agriext.willn.agriext.Control.ControlSpeaker;
 import com.agriext.willn.agriext.Control.ControlStation;
-import com.agriext.willn.agriext.Entity.Culture;
 import com.agriext.willn.agriext.Entity.Station;
 import com.agriext.willn.agriext.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

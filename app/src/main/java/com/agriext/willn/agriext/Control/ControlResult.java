@@ -16,25 +16,25 @@ import weka.core.converters.ArffSaver;
 import weka.core.converters.CSVLoader;
 
 
-public class ControlResult implements CallBack {
-    public static Result result;
+public class ControlResult{
     private Context context;
+    private double ev0 = 0f;
 
     public ControlResult(Context context) {
         this.context = context;
     }
 
-    public void calculate(final Culture culture, final CallBack callBack){
+    public Result calculate(final Culture culture){
+        Result result = null;
         try {
-            double water = quixadaHC(culture.getKc());
+            if (ev0 == 0) ev0 = quixadaHC();
+            double water = ev0 * culture.getKc();
             result = new Result(culture, water);
-            callBack.callBack();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
     }
-
-    public void callBack() { }
 
     private ArffSaver convertCSVToARFF(InputStream inputStream) {
         CSVLoader loader = new CSVLoader();
@@ -45,8 +45,6 @@ public class ControlResult implements CallBack {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // Salva ARFF
         ArffSaver saver = new ArffSaver();
         if (data != null) {
             saver.setInstances(data);
@@ -55,11 +53,11 @@ public class ControlResult implements CallBack {
         return saver;
     }
 
-    private double quixadaHC(double kc) throws Exception {
+    private double quixadaHC() throws Exception {
 
         Classifier m5pModel = null;
         try {
-            String filename = "model_test.model";
+            String filename = "model_test2.model";
             m5pModel = (Classifier) weka.core.SerializationHelper.read(context.getAssets().open(filename));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -75,7 +73,7 @@ public class ControlResult implements CallBack {
             return 0;
         }
 
-        Instances test = convertCSVToARFF(context.getAssets().open("2016total-semoutlier2.csv")).getInstances();
+        Instances test = convertCSVToARFF(context.getAssets().open("quixadateste.csv")).getInstances();
         int index = test.numAttributes() - 1;
         if (test.classIndex() == -1)
             test.setClassIndex(index);
@@ -89,7 +87,6 @@ public class ControlResult implements CallBack {
             value = test.instance(i).value(index);
             evapo = evapo + value;
         }
-
-        return evapo * kc;
+        return evapo;
     }
 }

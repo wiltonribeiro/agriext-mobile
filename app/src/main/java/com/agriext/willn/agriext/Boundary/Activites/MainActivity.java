@@ -10,49 +10,68 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.agriext.willn.agriext.Control.ControlCulture;
 import com.agriext.willn.agriext.Control.ControlResult;
 import com.agriext.willn.agriext.Control.ControlSpeaker;
 import com.agriext.willn.agriext.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnStart, btnSpeakStart;
+    ImageButton btnCultureSelection, btnStartWatering;
+    Button btnSpeakCultureSelection, btnSpeakStartWatering;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnStart = findViewById(R.id.btnStart);
-        btnSpeakStart = findViewById(R.id.btnSpeakerStart);
 
-        Animation pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
-        btnStart.startAnimation(pulse);
+
+        btnCultureSelection = findViewById(R.id.btnCultureSelection);
+        btnSpeakCultureSelection = findViewById(R.id.btnSpeakerCultureSelection);
+
+        btnStartWatering = findViewById(R.id.btnStartWatering);
+        btnSpeakStartWatering = findViewById(R.id.btnSpeakerStartWatering);
+
+
+//        Animation pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
+//        btnStartWatering.startAnimation(pulse);
+//        btnCultureSelection.startAnimation(pulse);
 
         final ControlSpeaker controlSpeaker = new ControlSpeaker(this);
-        final ControlResult controlResult = new ControlResult(this);
-        btnStart.setOnClickListener(new View.OnClickListener() {
+
+        ControlCulture.initCultureData(this);
+
+        btnStartWatering.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, CultureChoiceActivity.class));
+                startActivity(new Intent(MainActivity.this, ResultActivity.class));
                 controlSpeaker.speak("Iniciando");
             }
         });
 
-        btnSpeakStart.setOnClickListener(new View.OnClickListener() {
+        btnCultureSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controlSpeaker.speak("Iniciar");
+                startActivity(new Intent(MainActivity.this, CultureChoiceActivity.class));
+                controlSpeaker.speak("Abrindo");
             }
         });
 
-        new Handler().postDelayed(new Runnable() {
+        btnSpeakStartWatering.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                controlSpeaker.speak("Para iniciar pressione o botão em movimento na tela.");
+            public void onClick(View view) {
+                controlSpeaker.speak("clique acima para calcular a irrigação");
             }
-        }, 500);
+        });
 
+        btnSpeakCultureSelection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controlSpeaker.speak("clique acima para selecionar os seus tipos de plantações");
+            }
+        });
     }
 }
