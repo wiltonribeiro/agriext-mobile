@@ -1,9 +1,6 @@
 package com.agriext.willn.agriext.Boundary.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,31 +9,28 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.agriext.willn.agriext.Boundary.Activites.ResultActivity;
-import com.agriext.willn.agriext.Control.CallBack;
-import com.agriext.willn.agriext.Control.ControlLoading;
-import com.agriext.willn.agriext.Control.ControlResult;
+import com.agriext.willn.agriext.Control.ControlCulture;
 import com.agriext.willn.agriext.Control.ControlSpeaker;
 import com.agriext.willn.agriext.Entity.Culture;
 import com.agriext.willn.agriext.R;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import java.util.HashMap;
 
 
 public class AdapterCulture extends BaseAdapter {
-    private List<Culture> myList;
+    private HashMap<String,Culture> myList;
     private LayoutInflater inflater;
     private ControlSpeaker controlSpeaker;
+    private String[] mKeys;
     private Context context;
 
-    public AdapterCulture(Context context, List<Culture> myList, ControlSpeaker controlSpeaker) {
+    public AdapterCulture(Context context, HashMap<String,Culture> myList, ControlSpeaker controlSpeaker) {
         this.myList = myList;
         this.context = context;
         this.controlSpeaker = controlSpeaker;
+        this.mKeys = myList.keySet().toArray(new String[myList.size()]);
         inflater = LayoutInflater.from(context);
     }
 
@@ -48,7 +42,7 @@ public class AdapterCulture extends BaseAdapter {
 
     @Override
     public Culture getItem(int position) {
-        return myList.get(getCount() - position - 1);
+        return myList.get(mKeys[position]);
     }
 
     @Override
@@ -70,6 +64,7 @@ public class AdapterCulture extends BaseAdapter {
         }
 
         final Culture currentListData = getItem(position);
+
         mViewHolder.textCulture.setText(currentListData.getName().toUpperCase());
         Picasso.get().load(currentListData.getUrlImage()).into(mViewHolder.imgCulture);
         mViewHolder.btnSpeakCulture.setOnClickListener(new View.OnClickListener() {
@@ -79,38 +74,19 @@ public class AdapterCulture extends BaseAdapter {
             }
         });
 
+        if(ControlCulture.checkIfCultureIsSelected(currentListData))
+            mViewHolder.imgChecked.setVisibility(View.VISIBLE);
+
         mViewHolder.allContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Activity activity = (Activity)context;
-                final ControlSpeaker controlSpeaker = new ControlSpeaker(context);
-                final ControlLoading controlLoading = new ControlLoading(activity, controlSpeaker);
-                final ControlResult controlResult = new ControlResult(context);
-
-
-                controlLoading.initLoading();
-                Runnable runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        controlResult.calculate(currentListData, new CallBack() {
-                            @Override
-                            public void callBack() {
-                                controlLoading.finishLoading();
-                                activity.startActivity(new Intent(activity, ResultActivity.class));
-                            }
-                        });
-                    }
-                };
-
-                Runnable speaker = new Runnable() {
-                    @Override
-                    public void run() {
-                        controlSpeaker.speak("AGUARDE UM POUCO, ESTAMOS CARREGANDO");
-                    }
-                };
-
-                new Handler().postDelayed(speaker,100);
-                new Handler().postDelayed(runnable,2000);
+                if(ControlCulture.checkIfCultureIsSelected(currentListData)){
+                    mViewHolder.imgChecked.setVisibility(View.GONE);
+                    ControlCulture.removeSelectedCulture(currentListData);
+                } else {
+                    mViewHolder.imgChecked.setVisibility(View.VISIBLE);
+                    ControlCulture.addSelectedCulture(currentListData);
+                }
             }
         });
 
@@ -119,11 +95,12 @@ public class AdapterCulture extends BaseAdapter {
 
     private class MyViewHolder {
         TextView textCulture;
-        ImageView imgCulture;
+        ImageView imgCulture, imgChecked;
         Button btnSpeakCulture;
         RelativeLayout allContent;
         MyViewHolder(View item) {
             textCulture = item.findViewById(R.id.textCulture);
+            imgChecked = item.findViewById(R.id.imgChecked);
             imgCulture = item.findViewById(R.id.imgCulture);
             btnSpeakCulture = item.findViewById(R.id.btnSpeakCulture);
             allContent = item.findViewById(R.id.allContent);
