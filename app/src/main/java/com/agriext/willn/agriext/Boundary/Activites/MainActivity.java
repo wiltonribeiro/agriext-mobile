@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.agriext.willn.agriext.Control.ControlCulture;
 import com.agriext.willn.agriext.Control.ControlResult;
 import com.agriext.willn.agriext.Control.ControlSpeaker;
+import com.agriext.willn.agriext.Control.ControlStation;
 import com.agriext.willn.agriext.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,14 +42,19 @@ public class MainActivity extends AppCompatActivity {
 //        btnCultureSelection.startAnimation(pulse);
 
         final ControlSpeaker controlSpeaker = new ControlSpeaker(this);
+        final ControlStation controlStation = new ControlStation(this);
 
         ControlCulture.initCultureData(this);
 
         btnStartWatering.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, ResultActivity.class));
-                controlSpeaker.speak("Iniciando");
+                if(controlStation.checkStation()){
+                    startActivity(new Intent(MainActivity.this, ResultActivity.class));
+                    controlSpeaker.speak("Iniciando");
+                } else {
+                    startActivity(new Intent(MainActivity.this, StationChoice.class));
+                }
             }
         });
 

@@ -34,4 +34,14 @@ public class ControlSaveDataCache {
     public Set<String> getAllSelectedCulture(){
         return settings.getStringSet("cultures", null);
     }
+
+    public boolean firstTime(){
+        return settings.getBoolean("first", true);
+    }
+
+    public void setFirstTime(){
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("first",false);
+        editor.apply();
+    }
 }

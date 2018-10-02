@@ -30,7 +30,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#fff"
-                android:text="SELECIONE A SUA ESTAÇÃO"
+                android:text="USE A WIFI DA ESTAÇÃO"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -43,21 +43,49 @@
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_margin="20dp"
-            android:background="@drawable/corner_white"
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
             android:padding="20dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/wifi_signal"
+            android:id="@+id/btnConnectToWifi"
+            android:background="@drawable/corner_white"
+            android:layout_gravity="center"
+            android:layout_width="120dp"
+            android:layout_height="120dp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
             android:layout_height="wrap_content">
 
-            <ListView
-                android:id="@+id/listStation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:text="PROCURAR ESTAÇÃO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-            </ListView>
+            <Button
+                android:id="@+id/btnSpeakerStartWatering"
+                android:layout_gravity="center"
+                android:background="@drawable/speaker"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 
