@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         btnSpeakCultureSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controlSpeaker.speak("clique acima para selecionar os seus tipos de plantações");
+                controlSpeaker.speak("clique acima para selecionar os seus tipos de plantio");
             }
         });
     }

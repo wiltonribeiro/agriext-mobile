@@ -22,18 +22,28 @@ import java.util.ArrayList;
 
 public class ResultActivity extends AppCompatActivity {
     private ControlSpeaker controlSpeaker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        ArrayList<Result> results = new ArrayList<>();
-        final String textResultExplain = "Veja todos os resultados calculados para sua plantação";
-        controlSpeaker = new ControlSpeaker(this);
         ControlResult controlResult = new ControlResult(this);
 
+        ArrayList<Result> results = new ArrayList<>();
+        final String textResultExplain = "Veja todos os resultados calculados para sua plantio. O regador usado nesse aplicativo representa 10 litros de água";
+        controlSpeaker = new ControlSpeaker(this);
+
+        Button btnBack = findViewById(R.id.btnBack);
         Button btnSpeakResult = findViewById(R.id.btnSpeakResult);
         ListView listResult = findViewById(R.id.listResult);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ResultActivity.super.onBackPressed();
+            }
+        });
 
         new Handler().postDelayed(new Runnable() {
             @Override

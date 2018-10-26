@@ -41,7 +41,7 @@ public class StationChoice extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                controlSpeaker.speak("Olá, precisamos que você se conecte ao wifi da estação");
+                controlSpeaker.speak("Olá, precisamos que você se conecte na estação");
             }
         }, 500);
 
@@ -61,7 +61,7 @@ public class StationChoice extends AppCompatActivity {
         btnSpeakerStation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controlSpeaker.speak("USE A WIFI DA ESTAÇÃO");
+                controlSpeaker.speak("TOQUE PARA SE CONECTAR A ESTAÇÃO");
             }
         });
     }

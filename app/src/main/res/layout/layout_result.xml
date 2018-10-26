@@ -23,14 +23,14 @@
             <ImageView
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="230dp"
                 android:id="@+id/imgCulture" />
 
             <LinearLayout
                 android:background="@drawable/black_opacity"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="230dp">
 
                 <LinearLayout
                     android:layout_marginTop="20dp"
@@ -156,9 +156,11 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
                         android:layout_marginEnd="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
                         android:id="@+id/textCulture"
                         android:layout_width="wrap_content"
                         android:textColor="#fff"
@@ -173,8 +175,8 @@
                         android:background="@drawable/speaker"
                         android:layout_marginRight="20dp"
                         android:layout_marginEnd="20dp"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp" />
+                        android:layout_width="50dp"
+                        android:layout_height="50dp" />
 
                 </RelativeLayout>
 

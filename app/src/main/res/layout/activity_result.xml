@@ -16,38 +16,66 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                tools:ignore="UselessParent">
-
-                <TextView
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"
-                    android:layout_margin="10dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="#fff"
-                    android:text="RESULTADO"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/btnSpeakResult"
-                    android:layout_gravity="center"
-                    android:background="@drawable/speaker"
+                    android:id="@+id/btnBack"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
                     android:layout_width="30dp"
-                    android:layout_height="30dp" />
-            </LinearLayout>
+                    android:layout_height="30dp"
+                    android:background="@drawable/left_arrow"
+                    android:gravity="start" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    tools:ignore="UselessParent">
+
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:layout_margin="10dp"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="#fff"
+                        android:text="RESULTADO"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/btnSpeakResult"
+                        android:layout_gravity="center"
+                        android:background="@drawable/speaker"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="O regador usado possui 10 litros"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <ListView
                 android:id="@+id/listResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             </ListView>
+
+
 
 
         </LinearLayout>

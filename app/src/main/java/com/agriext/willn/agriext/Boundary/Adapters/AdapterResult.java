@@ -59,8 +59,8 @@ public class AdapterResult extends BaseAdapter {
         }
 
         final Result currentListData = getItem(position);
-        final String watering = ""+String.format(Locale.US,"%.2f", currentListData.getQuantityWater()/10);
-        final String liter = ""+String.format(Locale.US,"%.2f", currentListData.getQuantityWater());
+        final String watering = ""+String.format(Locale.US,"%.1f", currentListData.getQuantityWater()/10);
+        final String liter = ""+String.format(Locale.US,"%.1f", currentListData.getQuantityWater());
 
         mViewHolder.textResultWatering.setText(watering);
         mViewHolder.textResultLiter.setText(liter);
@@ -69,7 +69,7 @@ public class AdapterResult extends BaseAdapter {
         mViewHolder.btnSpeakerCultureResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String text = "Para a plantação de "+currentListData.getCulture().getName()+" você deve usar "+watering+" regadores cheios, ou, "+liter+" litros de água";
+                String text = "Para o plantio de "+currentListData.getCulture().getName()+" você deve usar "+watering+" regadores cheios, ou, "+liter+" litros de água";
                 controlSpeaker.speak(text);
             }
         });
