@@ -70,7 +70,7 @@ public class CultureChoiceActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                controlSpeaker.speak("Selecione o tipo de platio que você possui");
+                controlSpeaker.speak("Selecione o tipo de plantio que você possui");
             }
         }, 1000);
     }

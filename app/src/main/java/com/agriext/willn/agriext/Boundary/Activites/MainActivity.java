@@ -69,14 +69,14 @@ public class MainActivity extends AppCompatActivity {
         btnSpeakStartWatering.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controlSpeaker.speak("clique acima para calcular a irrigação");
+                controlSpeaker.speak("clique abaixo para calcular a irrigação");
             }
         });
 
         btnSpeakCultureSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controlSpeaker.speak("clique acima para selecionar os seus tipos de plantio");
+                controlSpeaker.speak("clique abaixo para selecionar os seus tipos de plantio");
             }
         });
     }
