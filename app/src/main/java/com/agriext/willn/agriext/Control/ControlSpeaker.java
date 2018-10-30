@@ -15,15 +15,16 @@ public class ControlSpeaker {
     }
 
     private TextToSpeech init(){
-        return  new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+
+        return new TextToSpeech(context, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if(status != TextToSpeech.ERROR) {
                     textToSpeech.setLanguage(new Locale("pt","br"));
-                    textToSpeech.setPitch(0.1f);
+                    textToSpeech.setSpeechRate(0.8f);
                 }
             }
-        });
+        }, "com.google.android.tts");
     }
 
     public void speak(String text){
