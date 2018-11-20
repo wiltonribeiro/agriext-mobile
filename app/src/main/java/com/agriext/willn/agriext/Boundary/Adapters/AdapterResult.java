@@ -59,17 +59,21 @@ public class AdapterResult extends BaseAdapter {
         }
 
         final Result currentListData = getItem(position);
-        final String watering = ""+String.format(Locale.US,"%.1f", currentListData.getQuantityWater()/10);
         final String liter = ""+String.format(Locale.US,"%.1f", currentListData.getQuantityWater());
 
-        mViewHolder.textResultWatering.setText(watering);
+        final int sdk = android.os.Build.VERSION.SDK_INT;
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            mViewHolder.imgCulture.setBackgroundDrawable(currentListData.getCulture().getImage());
+        } else {
+            mViewHolder.imgCulture.setBackground(currentListData.getCulture().getImage());
+        }
+
         mViewHolder.textResultLiter.setText(liter);
         mViewHolder.textCulture.setText(currentListData.getCulture().getName());
-        Picasso.get().load(currentListData.getCulture().getUrlImage()).into(mViewHolder.imgCulture);
         mViewHolder.btnSpeakerCultureResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String text = "Para o plantio de "+currentListData.getCulture().getName()+" você deve usar "+watering+" regadores cheios, ou, "+liter+" litros de água";
+                String text = "Para o plantio de "+currentListData.getCulture().getName()+" você deve usar "+liter+" litros de água";
                 controlSpeaker.speak(text);
             }
         });
@@ -78,14 +82,13 @@ public class AdapterResult extends BaseAdapter {
     }
 
     private class MyViewHolder {
-        TextView textCulture, textResultWatering, textResultLiter;
+        TextView textCulture, textResultLiter;
         Button btnSpeakerCultureResult;
         ImageView imgCulture;
         MyViewHolder(View item) {
             imgCulture = item.findViewById(R.id.imgCulture);
             textCulture = item.findViewById(R.id.textCulture);
             textResultLiter = item.findViewById(R.id.textResultLiter);
-            textResultWatering = item.findViewById(R.id.textResultWatering);
             btnSpeakerCultureResult = item.findViewById(R.id.btnSpeakCultureResult);
         }
     }

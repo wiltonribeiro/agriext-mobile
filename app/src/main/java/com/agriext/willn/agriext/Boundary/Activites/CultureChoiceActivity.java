@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -13,6 +15,7 @@ import android.widget.ListView;
 import com.agriext.willn.agriext.Control.ControlCulture;
 import com.agriext.willn.agriext.Control.ControlSpeaker;
 import com.agriext.willn.agriext.Control.ControlStation;
+import com.agriext.willn.agriext.Entity.Callback;
 import com.agriext.willn.agriext.R;
 
 public class CultureChoiceActivity extends AppCompatActivity {
@@ -30,12 +33,13 @@ public class CultureChoiceActivity extends AppCompatActivity {
         controlSpeaker = new ControlSpeaker(this);
         controlStation = new ControlStation(this);
 
-        ListView listCulture;
-        Button btnSpeakerCultureLayout, btnBack;
-        LinearLayout linearCalculate;
+        final ListView listCulture;
+        Button btnSpeakerCultureLayout, btnBack, btnSpeakerCalculateLayout;
+        final LinearLayout linearCalculate;
 
         listCulture = findViewById(R.id.listCulture);
         btnSpeakerCultureLayout = findViewById(R.id.btnSpeakerCultureLayout);
+        btnSpeakerCalculateLayout = findViewById(R.id.btnSpeakerCalculateLayout);
         btnBack = findViewById(R.id.btnBack);
         linearCalculate = findViewById(R.id.linearCalculate);
 
@@ -62,7 +66,21 @@ public class CultureChoiceActivity extends AppCompatActivity {
         btnSpeakerCultureLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controlSpeaker.speak("TIPOS DE PLANTIO");
+                controlSpeaker.speak("Para selecionar o plantio que você possui toque em cima da imagem do plantio desejado");
+            }
+        });
+
+        btnSpeakerCalculateLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse);
+                linearCalculate.startAnimation(animation);
+                controlSpeaker.speak("TOQUE NA IMAGEM EM MOVIMENTO AO LADO para CALCULAR QUANTIDADE DE ÁGUA", new Callback<Boolean>() {
+                    @Override
+                    public void onCallback(Boolean b) {
+                        if(b) linearCalculate.clearAnimation();
+                    }
+                });
             }
         });
 

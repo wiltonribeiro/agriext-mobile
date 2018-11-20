@@ -17,6 +17,7 @@ import com.agriext.willn.agriext.Control.ControlCulture;
 import com.agriext.willn.agriext.Control.ControlResult;
 import com.agriext.willn.agriext.Control.ControlSpeaker;
 import com.agriext.willn.agriext.Control.ControlStation;
+import com.agriext.willn.agriext.Entity.Callback;
 import com.agriext.willn.agriext.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,17 +30,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         btnCultureSelection = findViewById(R.id.btnCultureSelection);
         btnSpeakCultureSelection = findViewById(R.id.btnSpeakerCultureSelection);
 
         btnStartWatering = findViewById(R.id.btnStartWatering);
         btnSpeakStartWatering = findViewById(R.id.btnSpeakerStartWatering);
-
-
-//        Animation pulse = AnimationUtils.loadAnimation(this, R.anim.pulse);
-//        btnStartWatering.startAnimation(pulse);
-//        btnCultureSelection.startAnimation(pulse);
 
         final ControlSpeaker controlSpeaker = new ControlSpeaker(this);
         final ControlStation controlStation = new ControlStation(this);
@@ -69,14 +64,28 @@ public class MainActivity extends AppCompatActivity {
         btnSpeakStartWatering.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controlSpeaker.speak("clique abaixo para calcular a irrigação");
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse);
+                btnStartWatering.startAnimation(animation);
+                controlSpeaker.speak("clique abaixo na imagem em movimento abaixo para calcular a irrigação", new Callback<Boolean>() {
+                    @Override
+                    public void onCallback(Boolean b) {
+                        if(b) btnStartWatering.clearAnimation();
+                    }
+                });
             }
         });
 
         btnSpeakCultureSelection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controlSpeaker.speak("clique abaixo para selecionar os seus tipos de plantio");
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse);
+                btnCultureSelection.startAnimation(animation);
+                controlSpeaker.speak("clique abaixo na imagem em movimento para selecionar os seus tipos de plantio", new Callback<Boolean>() {
+                    @Override
+                    public void onCallback(Boolean b) {
+                        if(b) btnCultureSelection.clearAnimation();
+                    }
+                });
             }
         });
     }

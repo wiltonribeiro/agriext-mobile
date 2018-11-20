@@ -1,6 +1,8 @@
 package com.agriext.willn.agriext.Boundary.Activites;
 
+import android.content.Intent;
 import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +33,7 @@ public class ResultActivity extends AppCompatActivity {
         ControlResult controlResult = new ControlResult(this);
 
         ArrayList<Result> results = new ArrayList<>();
-        final String textResultExplain = "Veja todos os resultados calculados para sua plantio. O regador usado nesse aplicativo representa 10 litros de água";
+        final String textResultExplain = "Veja todos os resultados calculados para o seu plantio.";
         controlSpeaker = new ControlSpeaker(this);
 
         Button btnBack = findViewById(R.id.btnBack);
@@ -41,7 +43,8 @@ public class ResultActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ResultActivity.super.onBackPressed();
+                ActivityCompat.finishAffinity(ResultActivity.this);
+                startActivity(new Intent(ResultActivity.this, MainActivity.class));
             }
         });
 

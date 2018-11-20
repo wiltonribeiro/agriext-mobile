@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#479cb4"
+    tools:context=".Boundary.Activites.ExplainActivity">
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:text="Olá agricultor"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textExplain"
+            android:textAlignment="center"
+            android:textColor="#fff"
+            android:text="Bem-vindo ao aplicativo, sabemos que é sua primeira vez aqui, então vamos lhe explicar algo importante. Eu poderei estar lhe dizendo tudo que está escrito na tela do seu celular, basta apenas tocar no botão verde ao lado de cada texto. Este é o botão que você poderá tocar para ouvir o áudio."
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnSpeakerExplain"
+            android:background="@drawable/speaker"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="80dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/skipExplain"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+</RelativeLayout>

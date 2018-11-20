@@ -1,13 +1,15 @@
 package com.agriext.willn.agriext.Entity;
 
+import android.graphics.drawable.Drawable;
+
 public class Culture {
     private String name;
-    private String urlImage;
+    private Drawable image;
     private double kc;
 
-    public Culture(String name, String urlImage, double kc) {
+    public Culture(String name, Drawable image, double kc) {
         this.name = name;
-        this.urlImage = urlImage;
+        this.image = image;
         this.kc = kc;
     }
 
@@ -19,12 +21,12 @@ public class Culture {
         this.name = name;
     }
 
-    public String getUrlImage() {
-        return urlImage;
+    public Drawable getImage() {
+        return image;
     }
 
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+    public void setImage(Drawable image) {
+        this.image = image;
     }
 
     public double getKc() {

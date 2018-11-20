@@ -5,21 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
-
-import com.agriext.willn.agriext.Control.ControlSaveDataCache;
 import com.agriext.willn.agriext.Control.ControlSpeaker;
 import com.agriext.willn.agriext.Control.ControlStation;
-import com.agriext.willn.agriext.Entity.Result;
+import com.agriext.willn.agriext.Entity.Callback;
 import com.agriext.willn.agriext.R;
 
 public class StationChoice extends AppCompatActivity {
@@ -41,7 +37,7 @@ public class StationChoice extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                controlSpeaker.speak("Olá, precisamos que você se conecte na estação");
+                controlSpeaker.speak("Olá, você não está conectado a estação, por isso precisamos que você se conecte na estação");
             }
         }, 500);
 
@@ -61,7 +57,15 @@ public class StationChoice extends AppCompatActivity {
         btnSpeakerStation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controlSpeaker.speak("TOQUE PARA SE CONECTAR A ESTAÇÃO");
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.pulse);
+                connectToWifi.startAnimation(animation);
+
+                controlSpeaker.speak("clique abaixo na imagem em movimento para SE CONECTAR A ESTAÇÃO", new Callback<Boolean>() {
+                    @Override
+                    public void onCallback(Boolean b) {
+                        if(b) connectToWifi.clearAnimation();
+                    }
+                });
             }
         });
     }

@@ -65,8 +65,14 @@ public class AdapterCulture extends BaseAdapter {
 
         final Culture currentListData = getItem(position);
 
+
+        final int sdk = android.os.Build.VERSION.SDK_INT;
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            mViewHolder.imgCulture.setBackgroundDrawable(currentListData.getImage());
+        } else {
+            mViewHolder.imgCulture.setBackground(currentListData.getImage());
+        }
         mViewHolder.textCulture.setText(currentListData.getName().toUpperCase());
-        Picasso.get().load(currentListData.getUrlImage()).into(mViewHolder.imgCulture);
         mViewHolder.btnSpeakCulture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
